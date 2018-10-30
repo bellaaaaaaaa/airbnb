@@ -1,7 +1,7 @@
 class UsersController < Clearance::UsersController
     private 
 
-    # Override user_from_params from defaul clearance controller
+    # Override user_from_params from default clearance controller
     def user_from_params
         email = user_params.delete(:email)
         password = user_params.delete(:password)
@@ -14,6 +14,7 @@ class UsersController < Clearance::UsersController
           user.fullname = fullname
           user.age = age
         end
-      end
+    end
+    
     
 end
