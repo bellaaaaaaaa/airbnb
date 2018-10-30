@@ -1,0 +1,37 @@
+<h1>Create listing:</h1>
+
+<%= form_with scope: :listing, url: listings_path, local: true do |form| %>
+  <p>
+    <%= form.label :"Name your listing:" %><br>
+    <%= form.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= form.label :"Apartment, Beach Villa etc." %><br>
+    <%= form.text_field :roomtype %>
+  </p>
+
+   <p>
+    <%= form.label :"Number of guests" %><br>
+    <%= form.text_field :num_guests %>
+  </p>
+
+   <p>
+    <%= form.label :"Number of bedrooms" %><br>
+    <%= form.text_field :num_beds %>
+  </p>
+
+   <p>
+    <%= form.label :"Number of bathrooms" %><br>
+    <%= form.text_field :num_baths %>
+  </p>
+
+   <p>
+    <%= form.label :"Price/Night" %><br>
+    <%= form.text_field :price_per_night %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
