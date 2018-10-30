@@ -9,6 +9,8 @@
     <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
       <%= link_to '<button type="button">Add Listing</button>'.html_safe, new_listing_path %>
+      <%= link_to '<button type="button">My Listings</button>'.html_safe, my_list_path %>
+      <%= link_to '<button type="button">All Listings</button>'.html_safe, listings_path %>
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>

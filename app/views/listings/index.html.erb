@@ -1,1 +1,11 @@
-<h1>Listings index </h1>
+<h1>All Listings </h1>
+
+  <% @listings.each do |listing| %>
+    <tr>
+      <td>Name: <%= listing.name %></td><br>
+      <td>Type: <%= listing.roomtype %></td><br>
+      <td>Price/Night: <%= listing.price_per_night %></td><br>
+      <td>Host: <%= listing.user.fullname %></td><br>
+      <td><%= link_to 'Show', listing_path(listing) %></td><br>
+    </tr><br>
+  <% end %>
