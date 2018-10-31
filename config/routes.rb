@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Routes for user's listings.
   resources :listings
   
+  get "/listings/:id/verify" => "listings#verify_listing", as: "verify_listing"
   get "/my_list" => "listings#my_list", as: "my_list"
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"

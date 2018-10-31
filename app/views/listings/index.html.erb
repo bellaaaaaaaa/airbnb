@@ -1,7 +1,8 @@
 <h1>All Listings </h1>
-
+<div style="text-align:center">
   <% @listings.each do |listing| %>
-  <div class="card" style="width: 18rem;">
+  <div class="d-inline-block">
+  <div class="card" style="width: 22rem; text-align:left">
     <img class="card-img-top" src="yellow.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%= listing.name %></h5>
@@ -10,6 +11,15 @@
       <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
       <a href="#" class="btn btn-danger">Book</a>
     </div>
+    <div class="card-footer">
+    <% if listing.verified == true %>
+      <small class="text-muted"> Verified </small>
+    <% else %>
+      <small class="text-muted"> Unverified </small>
+    <% end %>
+    </div>
+</div>
 </div>
   <% end %>
+</div>
 

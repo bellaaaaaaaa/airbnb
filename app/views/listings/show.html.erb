@@ -22,3 +22,7 @@
   <strong>Price/Night:</strong>
   <%= @listing.price_per_night.to_s %>
 </p>
+
+<% if current_user.superadmin? || current_user.moderator? %>
+<%=link_to "Verify Listing", verify_listing_path(@listing.id) %>
+<% end %>

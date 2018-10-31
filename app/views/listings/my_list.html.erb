@@ -1,14 +1,19 @@
 <h1>Your Listings</h1>
   <% @my_listings.each do |listing| %>
-    <tr>
-      <td><%= listing.name %></td><br>
-      <td><%= listing.roomtype %></td><br>
-      <td><%= listing.price_per_night.to_s %></td><br>
-      <td><%= link_to 'Edit', edit_listing_path(listing) %></td> |
-      <td><%= link_to 'Show', listing_path(listing) %></td> |
-      <td><%= link_to 'Destroy', listing_path(listing),
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="yellow.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= listing.name %></h5>
+      <h6 class="card-title">Type:<%= listing.roomtype %></h6>
+      <h6 class="card-title">$<%= listing.price_per_night %></h6>
+      <a href=<%=edit_listing_path(listing) %> class="btn btn-primary">Edit</a>
+      <a href=<%=listing_path(listing) %> class="btn btn-danger">Show</a>
+      <div><%= link_to 'Destroy', listing_path(listing),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %></td><br>
-    </tr><br>
+              data: { confirm: 'Are you sure?' } %></div>
+    </div>
+</div>
   <% end %>
-</table>
+
+
+ 
