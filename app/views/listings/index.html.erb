@@ -1,11 +1,15 @@
 <h1>All Listings </h1>
 
   <% @listings.each do |listing| %>
-    <tr>
-      <td>Name: <%= listing.name %></td><br>
-      <td>Type: <%= listing.roomtype %></td><br>
-      <td>Price/Night: <%= listing.price_per_night %></td><br>
-      <td>Host: <%= listing.user.fullname %></td><br>
-      <td><%= link_to 'Show', listing_path(listing) %></td><br>
-    </tr><br>
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="yellow.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= listing.name %></h5>
+      <h6 class="card-title">$<%= listing.price_per_night %></h6>
+      <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
+      <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
+      <a href="#" class="btn btn-danger">Book</a>
+    </div>
+</div>
   <% end %>
+
