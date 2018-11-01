@@ -1,7 +1,8 @@
-<h1>Your Listings</h1>
+<h1 style="color:#484848;">Your Listings</h1>
   <% @my_listings.each do |listing| %>
+  <div class="d-inline-block">
     <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="yellow.jpg" alt="Card image cap">
+    <img class="card-img-top" src=<%= listing.image_url.to_s %> alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%= listing.name %></h5>
       <h6 class="card-title">Type:<%= listing.roomtype %></h6>
@@ -12,6 +13,7 @@
               method: :delete,
               data: { confirm: 'Are you sure?' } %></div>
     </div>
+</div>
 </div>
   <% end %>
 

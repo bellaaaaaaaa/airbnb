@@ -5,7 +5,7 @@ user = {}
 user['password'] = 'asdf'
 
 ActiveRecord::Base.transaction do
-  20.times do 
+  5.times do 
     user['fullname'] = Faker::Name.first_name 
     user['email'] = Faker::Internet.email
     user['age'] = rand(18..60)
@@ -19,7 +19,7 @@ uids = []
 User.all.each { |u| uids << u.id }
 
 ActiveRecord::Base.transaction do
-  40.times do 
+  10.times do 
     listing['name'] = Faker::App.name
     listing['roomtype'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
 

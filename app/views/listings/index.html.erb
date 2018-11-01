@@ -2,13 +2,13 @@
 <div style="text-align:center">
   <% @listings.each do |listing| %>
   <div class="d-inline-block">
-  <div class="card" style="width: 22rem; text-align:left">
-    <img class="card-img-top" src="mansion.jpg" alt="Card image cap">
+  <div class="card mb-4" style="width: 22rem; text-align:left">
+    <img class="card-img-top" src=<%= listing.image_url.to_s %> alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%= listing.name %></h5>
       <h6 class="card-title">$<%= listing.price_per_night %></h6>
       <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
-      <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
+      <a href=<%=listing_path(listing)%> class="btn btn-danger">View</a>
       <a href="#" class="btn btn-danger">Book</a>
       <% if current_user.moderator? || current_user.superadmin? %>
       <%= link_to 'Destroy', listing_path(listing),

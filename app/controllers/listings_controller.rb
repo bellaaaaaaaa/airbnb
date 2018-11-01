@@ -52,13 +52,17 @@ class ListingsController < ApplicationController
     def destroy
         @listing = Listing.find(params[:id])
         @listing.destroy
-    
-        redirect_to my_list_path
+
+        if current_user.customer?
+            redirect_to my_list_path
+        else
+            redirect_to listings_path
+        end
     end
 
     private
     def listing_params
-        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night)
+        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night, :image)
     end
 
     # Moderator and Superadmin can verify and delete listings
