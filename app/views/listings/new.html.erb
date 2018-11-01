@@ -1,6 +1,6 @@
 <h1>Create listing:</h1>
 
-<%= form_with scope: :listing, url: listings_path, local: true do |form| %>
+<%= form_with scope: :listing, url: listings_path, :html => {:multipart => true}, local: true do |form| %>
   <p>
     <%= form.label :"Name your listing:" %><br>
     <%= form.text_field :name %>
@@ -29,6 +29,9 @@
    <p>
     <%= form.label :"Price/Night" %><br>
     <%= form.text_field :price_per_night %>
+  </p>
+  <p>
+  <%= form.file_field :image %>
   </p>
  
   <p>

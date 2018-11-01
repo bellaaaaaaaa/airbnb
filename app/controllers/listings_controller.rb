@@ -1,4 +1,8 @@
 class ListingsController < ApplicationController
+    before_action :verify_actions, only:[:verify_listing, :delete]
+    before_action :create_actions, only:[:create]
+    before_action :modify_actions, only:[:edit, :update, :delete]
+
     # before_action :do_something, only: [:edit, :update]
     def index
         #show all listings
@@ -19,22 +23,8 @@ class ListingsController < ApplicationController
 
     def verify_listing
         @listing = Listing.find(params[:id])
-        if current_user.customer?
-            flash[:notice] = "Sorry. You are not allowed to perform this action."
-            return redirect_to root_url, notice: "Sorry. You do not have the permission to verify a property."
-  
-            elsif current_user.moderator?
-                @listing.update(verified: true)
-                return redirect_to listings_path, notice: "Listing Verified!"
-
-              
-            elsif current_user.superadmin?
-                @listing.update(verified: true)
-                return redirect_to listings_path, notice: "Listing Verified!"
-          end
-    end
-
-    def allowed?(action:, user:)
+        @listing.update(verified: true)
+        return redirect_to listings_path, notice: "Listing Verified!"
     end
 
     def edit
@@ -71,7 +61,26 @@ class ListingsController < ApplicationController
         params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night)
     end
 
-    # def do_something
-    #     redirect_to root_url
-    # end
+    # Moderator and Superadmin can verify and delete listings
+    def verify_actions
+        @listing = Listing.find(params[:id])
+        if current_user.customer? && @listing.user_id != current_user.id 
+            redirect_to root_url, notice: "You cant do this"
+        end 
+    end
+
+    # Only customers can create listings
+    def create_actions
+        if !current_user.customer?
+            redirect_to root_url, notice: "You cant do this"
+        end
+    end
+
+    # If listing doesn't belong to current user- he cannot edit, update or delete
+    def modify_actions
+        @listing = Listing.find(params[:id])
+        if current_user.id != @listing.user_id
+            redirect_to root_url, notice: "You cant do this"
+        end
+    end
 end
