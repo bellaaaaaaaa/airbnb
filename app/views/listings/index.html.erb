@@ -1,8 +1,9 @@
 <h1>All Listings </h1>
 <div style="text-align:center">
+<div class="card-deck">
   <% @listings.each do |listing| %>
   <div class="d-inline-block">
-  <div class="card mb-4" style="width: 22rem; text-align:left">
+  <div class="card mb-4" style="width: 22rem; height: 28rem; text-align:left">
     <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%= listing.name %></h5>
@@ -26,5 +27,6 @@
 </div>
 </div>
   <% end %>
+</div>
 </div>
 

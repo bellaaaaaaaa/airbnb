@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     # before_action :do_something, only: [:edit, :update]
     def index
         #show all listings
-        @listings = Listing.all.order('name')
+        @listings = Listing.all.order('name ASC')
     end
 
     #Show my listings
@@ -62,7 +62,7 @@ class ListingsController < ApplicationController
 
     private
     def listing_params
-        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night, :image)
+        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night, :image, {pictures:[]})
     end
 
     # Moderator and Superadmin can verify and delete listings

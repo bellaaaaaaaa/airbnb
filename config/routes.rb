@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   # Routes for user's listings.
   resources :listings
+  resources :listings do
+    resource :reservation
+  end
   
   get "/listings/:id/verify" => "listings#verify_listing", as: "verify_listing"
   get "/my_list" => "listings#my_list", as: "my_list"

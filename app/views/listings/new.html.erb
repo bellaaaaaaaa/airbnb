@@ -31,7 +31,12 @@
     <%= form.text_field :price_per_night %>
   </p>
   <p>
+  <%= form.label :"Add a cover image to your listing" %><br>
   <%= form.file_field :image %>
+  </p>
+   <p>
+    <%= form.label :"Add to your listings gallery" %><br>
+    <%= form.file_field :pictures, multiple: true %>
   </p>
  
   <p>

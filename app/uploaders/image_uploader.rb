@@ -1,7 +1,15 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  include CarrierWave::RMagick
+  # include CarrierWave::MiniMagick
+  def quality(percentage)
+    manipulate! do |img|
+      img.write(current_path){ self.quality = percentage } unless img.quality == percentage
+      img = yield(img) if block_given?
+      img
+      end
+  end
+
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -30,7 +38,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [200, 200]
+    process quality: 100 
+    process resize_to_fill: [300, 200]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
