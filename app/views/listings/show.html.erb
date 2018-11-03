@@ -1,4 +1,4 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 55%; margin: 0 auto">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -54,7 +54,17 @@
   <%= @listing.price_per_night.to_s %>
 </p>
 
-<%= form_with scope: :reservation, url: listing_reservation_path(@listing.id), local: true do |form| %>
+
+
+<% if current_user.superadmin? || current_user.moderator? %>
+<%=link_to "Verify Listing", verify_listing_path(@listing.id) %>
+<% end %>
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Price/Night $<%=@listing.price_per_night %></h5>
+    <%= form_with scope: :reservation, url: listing_reservation_path(@listing.id), local: true do |form| %>
   <p>
     <%= form.label :"Check In" %><br>
     <%= form.date_field :check_in %>
@@ -66,14 +76,12 @@
   </p>
 
    <p>
-    <%= form.label :"Number of guests" %><br>
+    <%= form.label :"Guests" %><br>
     <%= form.text_field :num_guests %>
   </p>
   <p>
-    <%= form.submit %>
+    <%= form.button :submit => "", class: "btn btn-danger" %>
   </p>
   <% end %>
-
-<% if current_user.superadmin? || current_user.moderator? %>
-<%=link_to "Verify Listing", verify_listing_path(@listing.id) %>
-<% end %>
+  </div>
+</div>
