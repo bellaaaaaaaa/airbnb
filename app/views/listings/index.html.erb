@@ -1,33 +1,30 @@
-<h1>All Listings </h1>
+<h1>Listings </h1>
 <div style="text-align:center">
-<div class="card-deck">
-  <% @listings.each do |listing| %>
-  <div class="d-inline-block">
-  <div class="card mb-4" style="width: 22rem; height: 28rem; text-align:left">
-    <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"><%= listing.name %></h5>
-      <h6 class="card-title">$<%= listing.price_per_night %></h6>
-      <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
-      <a href=<%=listing_path(listing)%> class="btn btn-danger">View</a>
-      <a href="#" class="btn btn-danger">Book</a>
-      <% if current_user.moderator? || current_user.superadmin? %>
-      <%= link_to 'Destroy', listing_path(listing),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-              <% end %>
+  <div class="card-deck">
+    <% @listings.each do |listing| %>
+    <div class="d-inline-block">
+      <div class="card mb-4" style="width: 20rem; height: 25rem; text-align:left">
+        <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= listing.name %> 
+            <% if listing.verified == true %>
+              <span class="badge badge-pill badge-light">✓</span>
+            <% end %>
+          </h5>
+          <h6 class="card-title">$<%= listing.price_per_night %></h6>
+          <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
+          <a href=<%=listing_path(listing)%> class="btn btn-danger">View</a>
+          <a href="#" class="btn btn-danger">Book</a>
+          <% if current_user.moderator? || current_user.superadmin? %>
+          <%= link_to 'Destroy', listing_path(listing),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+                  <% end %>
+        </div>
+      </div>
     </div>
-    <div class="card-footer">
-    <% if listing.verified == true %>
-      <small class="text-muted"> Verified </small>
-    <% else %>
-      <small class="text-muted"> Unverified </small>
     <% end %>
-    </div>
-</div>
-</div>
-  <% end %>
-</div>
+  </div>
 </div>
 
 

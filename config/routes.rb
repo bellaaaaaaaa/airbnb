@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :listings do
     resource :reservation
   end
+
+  resources :users, controller:'users', only: [:show, :edit, :update]
   
   get "/listings/:id/verify" => "listings#verify_listing", as: "verify_listing"
   get "/my_list" => "listings#my_list", as: "my_list"

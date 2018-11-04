@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   has_many :listings 
   has_many :reservations
+  mount_uploader :image, ImageUploader
   include Clearance::User
   # Declaring roles for user
   enum status: { superadmin: 0, moderator: 1, customer: 2 }

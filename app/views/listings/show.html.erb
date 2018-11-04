@@ -29,6 +29,10 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<br>
+
+
+<h2> Information </h2>
 <p>
   <strong>Listing Name:</strong>
   <%= @listing.name %>
@@ -54,34 +58,42 @@
   <%= @listing.price_per_night.to_s %>
 </p>
 
+<div class="card" style="width: 28rem;">
+  <div class="card-body">
+    <h5 class="card-title">Price/Night $<%=@listing.price_per_night %></h5>
+        <%= form_with scope: :reservation, url: listing_reservation_path(@listing.id), local: true do |form| %>
+        <div class="form-group row">
+          <div class="form-group col-md-6">
+            <div>
+              <%= form.label :"Check In" %>
+              <%= form.date_field :check_in, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <div>
+              <%= form.label :"Check Out" %><br>
+              <%= form.date_field :check_out, class:'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="form-group col-md-12">
+              <div>
+                <%= form.label :"Guests" %><br>
+                <%= form.text_field :num_guests, class:'form-control' %>
+              </div>
+              <br>
+              <div>
+                <button type="submit" class="btn btn-primary">Reserve</button>
+              </div>
+            </div>
+          <div>
+        <% end %>
+  </div>
+</div>
+
 
 
 <% if current_user.superadmin? || current_user.moderator? %>
 <%=link_to "Verify Listing", verify_listing_path(@listing.id) %>
 <% end %>
-
-
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Price/Night $<%=@listing.price_per_night %></h5>
-    <%= form_with scope: :reservation, url: listing_reservation_path(@listing.id), local: true do |form| %>
-  <p>
-    <%= form.label :"Check In" %><br>
-    <%= form.date_field :check_in %>
-  </p>
- 
-  <p>
-    <%= form.label :"Check Out" %><br>
-    <%= form.date_field :check_out %>
-  </p>
-
-   <p>
-    <%= form.label :"Guests" %><br>
-    <%= form.text_field :num_guests %>
-  </p>
-  <p>
-    <%= form.button :submit => "", class: "btn btn-danger" %>
-  </p>
-  <% end %>
-  </div>
-</div>

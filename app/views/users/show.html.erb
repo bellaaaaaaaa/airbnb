@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+        <h1> Profile </h1>
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src=<%= @user.image_url(:thumb).to_s %> alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= @user.fullname.upcase %> | <%=@user.age %></h5>
+                <h6> Email <%=@user.email %> </h6>
+                <h6> Bio </h6>
+                <p>
+                <%= @user.bio %>
+                </p>
+                <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Update 
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <% if @user.id = current_user.id %>
+                            <%= form_for @user, :html => {:multipart => true}, local: true do |form| %>
+                                <p>
+                                    <%= form.label :"Change your name" %><br>
+                                    <%= form.text_field :fullname %>
+                                </p>
+                                <p>
+                                    <%= form.label :"Update bio" %><br>
+                                    <%= form.text_area :bio %>
+                                </p>
+                                <p>
+                                    <%= form.file_field :image %>
+                                    <%= form.button :submit => "", class: "btn btn-primary btn-xs" %>
+                                </p>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+    <h1> Your Reservations </h1>
+        <div class="container">
+            <p>Put something here later lol:</p>            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Listing</th>
+                    <th>Host</th>
+                    <th>Total</th>
+                    <th>When</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @user.reservations.each do |reservation| %>
+                <tr>
+                    <td><%= reservation.listing.name %></td>
+                    <td><%= reservation.listing.user.fullname %></td>
+                    <td>$<%= (reservation.listing.price_per_night) * (reservation.check_out - reservation.check_in).to_i %></td>
+                    <td><%= reservation.check_in %> <i>to</i> <%= reservation.check_out %></td>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+        <h1> Listings </h1>
+        <% @user.listings.each do |listing| %>
+            <div class="card mb-3">
+                <img class="card-img-top" src=<%= listing.image_url.to_s %> alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= listing.name %></h5>
+                    <h6> Price/Night $<%= listing.price_per_night %></h6>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
