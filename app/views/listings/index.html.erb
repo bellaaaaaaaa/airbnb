@@ -13,8 +13,7 @@
           </h5>
           <h6 class="card-title">$<%= listing.price_per_night %></h6>
           <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
-          <a href=<%=listing_path(listing)%> class="btn btn-danger">View</a>
-          <a href="#" class="btn btn-danger">Book</a>
+          <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
           <% if current_user.moderator? || current_user.superadmin? %>
           <%= link_to 'Destroy', listing_path(listing),
                   method: :delete,

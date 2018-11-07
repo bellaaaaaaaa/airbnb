@@ -12,6 +12,7 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem "mini_magick"
 gem "rmagick"
 gem 'carrierwave', '~> 1.0'
+gem 'braintree'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

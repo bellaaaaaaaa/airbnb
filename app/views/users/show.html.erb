@@ -56,7 +56,7 @@
                 <tbody>
                 <% @user.reservations.each do |reservation| %>
                 <tr>
-                    <td><%= reservation.listing.name %></td>
+                    <td><%= link_to reservation.listing.name, listing_path(reservation.listing.id)  %></td>
                     <td><%= reservation.listing.user.fullname %></td>
                     <td>$<%= (reservation.listing.price_per_night) * (reservation.check_out - reservation.check_in).to_i %></td>
                     <td><%= reservation.check_in %> <i>to</i> <%= reservation.check_out %></td>
@@ -72,6 +72,10 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= listing.name %></h5>
                     <h6> Price/Night $<%= listing.price_per_night %></h6>
+                    <% listing.reservations.each do |reservation| %>
+                        <p> <%= reservation.check_in %> to <%=reservation.check_out %>
+                    <% end %>
+
                 </div>
             </div>
         <% end %>
