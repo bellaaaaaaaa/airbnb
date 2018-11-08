@@ -14,6 +14,8 @@ gem "rmagick"
 gem 'carrierwave', '~> 1.0'
 gem 'braintree'
 gem "letter_opener", :group => :development
+gem "sidekiq"
+gem 'redis'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

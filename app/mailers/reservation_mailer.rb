@@ -4,7 +4,7 @@ class ReservationMailer < ApplicationMailer
 
     def successful_reservation(reservation, host)
         @user = reservation.user
-        # @reservation = reservation
+        @reservation = reservation
         mail(to: host.email, subject: 'Someone booked your listing!')
     end
 end

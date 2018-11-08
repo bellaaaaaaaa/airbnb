@@ -6,6 +6,8 @@
   <body>
     <h1>Congratulations! You have received a booking from <%= @user.fullname %></h1>
     <p>
+      <%= @user.fullname %> will be staying at <%= @reservation.listing.name %> from <%= @reservation.check_in%> to <%= @reservation.check_out%>.
+      Total cost: $<%= @reservation.total_price %>
       You may contact <%= @user.fullname %> through AirBNB.
     </p>
   </body>
