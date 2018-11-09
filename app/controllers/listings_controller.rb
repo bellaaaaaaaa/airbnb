@@ -5,7 +5,6 @@ class ListingsController < ApplicationController
 
     # before_action :do_something, only: [:edit, :update]
     def index
-        #show all listings
         @listings = Listing.all.order('name ASC')
     end
 
@@ -60,9 +59,40 @@ class ListingsController < ApplicationController
         end
     end
 
+    def search
+        @listings = Listing.city(params[:search])
+        @listings += Listing.roomtype(params[:search])
+        respond_to do |format|
+            format.html { render 'index' } # local: true
+            format.js # remote: true
+        end
+    end
+
+    ########################################## ACTIONS FOR NUMBER OF ROOMS! ##########################################
+    def one_room
+        @listings = Listing.where(num_beds: 1)
+        render 'index'
+    end
+    def two_rooms
+        @listings = Listing.where(num_beds: 2)
+        render 'index'
+    end
+    def three_rooms
+        @listings = Listing.where(num_beds: 3)
+        render 'index'
+    end
+    def four_rooms
+        @listings = Listing.where(num_beds: 4)
+        render 'index'
+    end
+    def five_rooms
+        @listings = Listing.where("num_beds >= ?", 5)
+        render 'index'
+    end
+
     private
     def listing_params
-        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night, :image, {pictures:[]})
+        params.require(:listing).permit(:name, :roomtype, :num_guests, :num_beds, :num_baths, :price_per_night, :image, {pictures:[]}, :city)
     end
 
     # Moderator and Superadmin can verify and delete listings
@@ -86,5 +116,9 @@ class ListingsController < ApplicationController
         if current_user.id != @listing.user_id
             redirect_to root_url, notice: "You cant do this"
         end
+    end
+
+    def filtering_params(params)
+        params.slice(:city, :starts_with)
     end
 end

@@ -1,0 +1,22 @@
+<% @listings.each do |listing| %>
+<div class="d-inline-block">
+  <div class="card mb-4" style="width: 20rem; height: 25rem; text-align:left">
+    <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= listing.name %> 
+        <% if listing.verified == true %>
+          <span class="badge badge-pill badge-light">✓</span>
+        <% end %>
+      </h5>
+      <h6 class="card-title">$<%= listing.price_per_night %></h6>
+      <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
+      <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
+      <% if current_user.moderator? || current_user.superadmin? %>
+      <%= link_to 'Destroy', listing_path(listing),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+              <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

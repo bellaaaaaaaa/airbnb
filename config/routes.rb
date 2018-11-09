@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   post 'reservations/:id/braintree/checkout' => 'braintree#checkout', as: 'braintree_checkout'
+  post '/search' => 'listings#search', as: 'listings_search'
+  post '/searchprice' => 'listings#searchprice', as: 'listings_searchprice'
+  get 'listings/num_beds/1' => 'listings#one_room', as:'listings_one_room'
+  get 'listings/num_beds/2' => 'listings#two_rooms', as:'listings_two_rooms'
+  get 'listings/num_beds/3' => 'listings#three_rooms', as:'listings_three_rooms'
+  get 'listings/num_beds/4' => 'listings#four_rooms', as:'listings_four_rooms'
+  get 'listings/num_beds/5' => 'listings#five_rooms', as:'listings_five_rooms'
  
   
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]

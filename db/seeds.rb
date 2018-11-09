@@ -19,9 +19,10 @@ uids = []
 User.all.each { |u| uids << u.id }
 
 ActiveRecord::Base.transaction do
-  10.times do 
+  40.times do 
     listing['name'] = Faker::App.name
     listing['roomtype'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
+    listing['city'] = ["Tokyo", "Singapore", "Paris", "New York", "Athens", "Rome", "Venice", "Shanghai", "Kyoto", "Bangkok", "Hong Kong", "Bali"].sample
 
     listing['num_guests'] = rand(1..5)
     listing['num_beds'] = rand(1..6)

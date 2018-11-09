@@ -16,6 +16,7 @@ gem 'braintree'
 gem "letter_opener", :group => :development
 gem "sidekiq"
 gem 'redis'
+gem 'pg_search'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
