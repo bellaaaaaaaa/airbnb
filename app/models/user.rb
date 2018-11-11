@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
-  has_many :listings 
-  has_many :reservations
+  has_many :listings, dependent: :destroy
+  has_many :reservations, dependent: :destroy
   mount_uploader :image, ImageUploader
   include Clearance::User
   # Declaring roles for user

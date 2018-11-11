@@ -1,35 +1,35 @@
-<h1>Listings </h1><span>
+<div class="row">
+<h1>Listings </h1><span style="padding-right: 10px"></span>
 <%= form_with url:listings_search_path, class:'form-inline my-2 my-lg-0' , :method => 'post'  do |form| %>
     <%= form.text_field :search, class: "form-control mr-sm-2" %>
     <%= form.submit "search", class:"btn btn-outline-success my-2 my-sm-0" %>
-  <% end %></span>
-
-
-  <div style="text-align:center">
-    <div class="card-deck" id="card-deck">
-      <% @listings.each do |listing| %>
-      <div class="d-inline-block">
-        <div class="card mb-4" style="width: 20rem; height: 25rem; text-align:left">
-          <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><%= listing.name %> 
-              <% if listing.verified == true %>
-                <span class="badge badge-pill badge-light">✓</span>
-              <% end %>
-            </h5>
-            <h6 class="card-title">$<%= listing.price_per_night %></h6>
-            <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
-            <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
-            <% if current_user.moderator? || current_user.superadmin? %>
-            <%= link_to 'Destroy', listing_path(listing),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-                    <% end %>
-          </div>
-        </div>
+  <% end %>
+</div><br>
+  
+<div class="card-deck" id="card-deck" style="display:flex; justify-content:space-between;">
+  <% @listings.each do |listing| %>
+  <div class="d-inline-block">
+    <div class="card mb-4" style="width: 20rem; height: 25rem; text-align:left">
+      <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%= listing.name %> 
+          <% if listing.verified == true %>
+            <span class="badge badge-pill badge-light">✓</span>
+          <% end %>
+        </h5>
+        <h6 class="card-title">$<%= listing.price_per_night %></h6>
+        <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
+        <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
+        <% if current_user.moderator? || current_user.superadmin? %>
+        <%= link_to 'Destroy', listing_path(listing), class:"btn btn-danger",
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
+  <% end %>
+</div>
+
 
 

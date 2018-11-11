@@ -12,7 +12,7 @@
       <h6 class="card-title">Host: <%= listing.user.fullname %></h6>
       <a href=<%=listing_path(listing)%> class="btn btn-primary">View</a>
       <% if current_user.moderator? || current_user.superadmin? %>
-      <%= link_to 'Destroy', listing_path(listing),
+      <%= link_to 'Destroy', listing_path(listing), class:"btn btn-danger",
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
               <% end %>

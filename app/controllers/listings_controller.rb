@@ -25,6 +25,11 @@ class ListingsController < ApplicationController
         @listing.update(verified: true)
         return redirect_to listings_path, notice: "Listing Verified!"
     end
+    def unverify_listing
+        @listing = Listing.find(params[:id])
+        @listing.update(verified: false)
+        return redirect_to listings_path, notice: "Listing Unverified!"
+    end
 
     def edit
         @listing = Listing.find(params[:id])

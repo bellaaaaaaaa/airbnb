@@ -1,21 +1,23 @@
 <h1 style="color:#484848;">Your Listings</h1>
+<div class="card-deck" id="card-deck" style="display:flex; justify-content:space-between;">
   <% @my_listings.each do |listing| %>
   <div class="d-inline-block">
-    <div class="card" style="width: 18rem;">
+    <div class="card mb-4" style="width: 20rem; height: 25rem; text-align:left">
     <img class="card-img-top" src=<%= listing.image_url(:thumb).to_s %> alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%= listing.name %></h5>
       <h6 class="card-title">Type:<%= listing.roomtype %></h6>
       <h6 class="card-title">$<%= listing.price_per_night %></h6>
       <a href=<%=edit_listing_path(listing) %> class="btn btn-primary">Edit</a>
-      <a href=<%=listing_path(listing) %> class="btn btn-danger">Show</a>
-      <div><%= link_to 'Destroy', listing_path(listing),
+      <a href=<%=listing_path(listing) %> class="btn btn-primary">Show</a>
+      <%= link_to 'Destroy', listing_path(listing), class:'btn btn-danger',
               method: :delete,
-              data: { confirm: 'Are you sure?' } %></div>
+              data: { confirm: 'Are you sure?' } %>
     </div>
 </div>
 </div>
   <% end %>
+</div>
 
 
  
