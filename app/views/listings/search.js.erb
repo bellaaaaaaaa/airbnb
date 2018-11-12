@@ -1,2 +1,10 @@
-$('#card-deck').html('<%= j render 'carddeck'%>')
+$("#list").html();
+<% @listings_autocomplete.each do |listing| %>
+var option = document.createElement("option");
+option.value = "<%= listing %>";
+
+//append option to list
+$("#list").append(option);
+<% end %>;
+$('#card-deck').html('<%= j render 'carddeck'%>');
 

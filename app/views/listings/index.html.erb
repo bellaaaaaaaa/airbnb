@@ -1,8 +1,9 @@
 <div class="row">
 <h1>Listings </h1><span style="padding-right: 10px"></span>
-<%= form_with url:listings_search_path, class:'form-inline my-2 my-lg-0' , :method => 'post'  do |form| %>
-    <%= form.text_field :search, class: "form-control mr-sm-2" %>
+<%= form_with url:listings_search_path, class:'form-inline my-2 my-lg-0' , :method => 'post', id: "city-search"  do |form| %>
+    <%= form.text_field :search, class: "form-control mr-sm-2", list: 'list' %>
     <%= form.submit "search", class:"btn btn-outline-success my-2 my-sm-0" %>
+    <datalist id="list"></datalist>
   <% end %>
 </div><br>
   
@@ -30,6 +31,42 @@
   </div>
   <% end %>
 </div>
+<%= paginate @listings %>
 
 
+<script>
+$(document).on('turbolinks:load', function(){
 
+$("#city-search").on("keyup", function(){
+  autocomplete()
+});
+
+function autocomplete(){
+  $.ajax({
+    url: '/search',
+    type: 'POST',
+    data: $("#city-search").serialize(), //takes the form data and authenticity toke and converts it into a standard URL
+    dataType: 'json', //specify what type of data you're expecting back from the servers
+    error: function() {
+        console.log("Something went wrong");
+    },
+    success: function(data) {
+      document.getElementById('list').innerHTML = '';
+      $("#list").empty();
+
+      var uniquedata = [];
+      $.each(data, function(i, el){
+          if($.inArray(el, uniquedata) === -1) uniquedata.push(el);
+      });
+
+      uniquedata.forEach(function(element) {
+        var option = document.createElement("option");
+        option.value = element;
+        //append option to list
+        $("#list").append(option);
+      });
+    }
+  });
+}
+})
+</script>

@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
 
     # before_action :do_something, only: [:edit, :update]
     def index
-        @listings = Listing.all.order('name ASC')
+        @listings = Listing.order(:name).page params[:page]
     end
 
     #Show my listings
@@ -38,6 +38,7 @@ class ListingsController < ApplicationController
     def create
         @listing = Listing.new(listing_params)
         @listing.user_id = current_user.id
+        @listing.city = ["Tokyo", "Singapore", "Paris", "New York", "Athens", "Rome", "Venice", "Shanghai", "Kyoto", "Bangkok", "Hong Kong", "Bali"].sample
         @listing.save
         redirect_to @listing
     end
@@ -65,10 +66,12 @@ class ListingsController < ApplicationController
     end
 
     def search
+        @listings_autocomplete = Listing.search_city(params["search"]) #added
         @listings = Listing.city(params[:search])
         @listings += Listing.roomtype(params[:search])
         respond_to do |format|
             format.html { render 'index' } # local: true
+            format.json { render json: @listings_autocomplete }
             format.js # remote: true
         end
     end
