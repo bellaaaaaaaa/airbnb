@@ -1,16 +1,18 @@
 <div id="clearance" class="sign-up">
-  <h2><%= t(".title") %></h2>
+  <h2 style='text-align:center'><%= t(".title") %></h2>
+<div class="container" style="display:flex; justify-content: center">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <%= form_for @user do |form| %>
+        <%= render partial: '/users/form', object: form %>
 
-  <%= form_for @user do |form| %>
-    <%= render partial: '/users/form', object: form %>
+        <br/>
+        <div class="submit-field">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
 
-    <div class="submit-field">
-      <%= form.submit %>
+      <% end %>
+      </div>
     </div>
-
-    <div class="other-links">
-      <%= link_to t(".sign_in"), sign_in_path %>
-    </div>
-  <% end %>
+  </div>
 </div>
-<%= link_to "Sign in with Google", "/auth/google_oauth2" %>

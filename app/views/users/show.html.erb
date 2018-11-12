@@ -74,10 +74,16 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= listing.name %></h5>
                     <h6> Price/Night $<%= listing.price_per_night %></h6>
-                    <% listing.reservations.each do |reservation| %>
-                        <p> <%= reservation.check_in %> to <%=reservation.check_out %>
-                    <% end %>
-
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseReservations<%=listing.id%>" aria-expanded="false" aria-controls="collapseExample">
+                        View Reservations
+                    </button>
+                    <div class="collapse" id="collapseReservations<%=listing.id%>">
+                        <div class="card card-body">
+                            <% listing.reservations.each do |reservation| %>
+                                <p> <%= reservation.check_in %> to <%=reservation.check_out %></p>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
             </div>
         <% end %>
