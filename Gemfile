@@ -19,6 +19,7 @@ gem 'redis'
 gem 'pg_search'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'rails_12factor'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
