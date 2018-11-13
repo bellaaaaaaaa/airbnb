@@ -38,7 +38,6 @@ class ListingsController < ApplicationController
     def create
         @listing = Listing.new(listing_params)
         @listing.user_id = current_user.id
-        @listing.city = ["Tokyo", "Singapore", "Paris", "New York", "Athens", "Rome", "Venice", "Shanghai", "Kyoto", "Bangkok", "Hong Kong", "Bali"].sample
         @listing.save
         redirect_to @listing
     end

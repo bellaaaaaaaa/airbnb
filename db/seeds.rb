@@ -29,8 +29,6 @@ ActiveRecord::Base.transaction do
     listing['num_baths'] = rand(1..7)
     listing['price_per_night'] = rand(80..500)
     listing['user_id'] = uids.sample
-    listing['image'] = ["a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg", "g.jpeg", "h.jpeg", "i.jpeg", "j.jpeg", "robbs.jpg", "mansion.jpg"].sample
-    # listing['pictures'] = ["a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg", "g.jpeg", "h.jpeg", "i.jpeg", "j.jpeg", "robbs.jpg", "mansion.jpg"].sample
     Listing.create(listing)
   end
 end
